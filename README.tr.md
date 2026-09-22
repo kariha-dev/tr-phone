@@ -107,6 +107,8 @@ $phone->isMobile(); // true
 
 Cep telefonu doğrulaması BTK planındaki `50X`, `53X`, `54X`, belirli `55X` ve diğer belgelenmiş mobil hizmet prefixlerine göre yapılır.
 
+BTK ayrıca bazı özel 5XX hizmetlerini mobil numaralar bölümünde listeler: mobil sanal şebeke hizmeti numaraları (`510`, `516`, `561`), çağrı hizmeti numaraları (`512`), M2M hizmet numaraları (`570`-`575`), GMPCS mobil uydu hizmeti numaraları (`592`) ve GSM-R demiryolu haberleşme numaraları (`594`). TR Phone bu prefixleri geçerli Türkiye mobil numaralandırma planı girdileri olarak kabul eder; fakat bunları sıradan bireysel cep telefonu operatörü tahsisi gibi tanımlamaz.
+
 ## Sabit Hat
 
 ```php
@@ -125,9 +127,10 @@ $phone = PhoneNumber::parse('0532 123 45 67');
 
 echo $phone->prefix();         // 532
 echo $phone->prefixOperator(); // Turkcell
+echo $phone->prefixService();  // Mobile electronic communication service
 ```
 
-`prefixOperator()` ve `prefixAllocation()` yalnızca prefix bazlı ilk tahsis bilgisini döndürür. Abonenin güncel operatörünü garanti etmez.
+`prefixOperator()` ve `prefixAllocation()` yalnızca prefix bazlı ilk tahsis bilgisini döndürür. Abonenin güncel operatörünü garanti etmez. `prefixService()` özellikle M2M, GMPCS, GSM-R, çağrı hizmeti ve mobil sanal şebeke hizmeti gibi özel servislerde BTK hizmet kategorisini açıklamak için kullanılabilir.
 
 ## Numara Taşınabilirliği Uyarısı
 
@@ -175,6 +178,7 @@ Daha fazla örnek için [docs/examples.md](docs/examples.md) dosyasına bakabili
 - `PhoneNumber::prefix(): string`
 - `PhoneNumber::prefixOperator(): ?string`
 - `PhoneNumber::prefixAllocation(): ?string`
+- `PhoneNumber::prefixService(): ?string`
 - `PhoneNumber::areaName(): ?string`
 - `TrPhone::validate(string $input): bool`
 - `TrPhone::normalize(string $input): string`
@@ -214,7 +218,7 @@ Lütfen [CONTRIBUTING.md](CONTRIBUTING.md) dosyasını okuyun. GitHub issue'lar�
 
 ## Güvenlik
 
-Lütfen [SECURITY.md](SECURITY.md) dosyasını okuyun. Güvenlik bildirimleri `info@kariha.net` adresine gönderilebilir.
+Lütfen [SECURITY.md](SECURITY.md) dosyasını okuyun. Güvenlik bildirimleri `security@kariha.net` adresine gönderilebilir.
 
 ## Lisans
 

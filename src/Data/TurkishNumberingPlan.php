@@ -9,7 +9,8 @@ use Kariha\TrPhone\PhoneType;
 final class TurkishNumberingPlan
 {
     public const SOURCE = 'BTK Ulusal Numaralandirma Plani / Genel Numaralandirma Plani, verified 2026-09-23.';
-    public const SOURCE_URL = 'https://www.btk.gov.tr/genel-numaralandirma-plani';
+    public const SOURCE_URL = 'https://www.btk.gov.tr/ulusal-numaralandirma-plani';
+    public const GENERAL_PLAN_URL = 'https://www.btk.gov.tr/genel-numaralandirma-plani';
 
     /**
      * @var array<int, string>
@@ -25,6 +26,7 @@ final class TurkishNumberingPlan
         '236' => 'Manisa',
         '242' => 'Antalya',
         '246' => 'Isparta',
+        '248' => 'Burdur',
         '252' => 'Mugla',
         '256' => 'Aydin',
         '258' => 'Denizli',
@@ -60,6 +62,7 @@ final class TurkishNumberingPlan
         '368' => 'Sinop',
         '370' => 'Karabuk',
         '372' => 'Zonguldak',
+        '374' => 'Bolu',
         '376' => 'Cankiri',
         '378' => 'Bartin',
         '380' => 'Duzce',
@@ -98,7 +101,9 @@ final class TurkishNumberingPlan
     ];
 
     /**
-     * Prefix allocation data, not current carrier data.
+     * Prefix allocation data, not current carrier data. All entries are in the
+     * 5XX mobile-number section of BTK's general numbering plan, including
+     * special-purpose services such as MVNO, M2M, GMPCS, and GSM-R.
      *
      * @var array<int, string>
      */
@@ -147,6 +152,54 @@ final class TurkishNumberingPlan
         '594' => 'TCDD GSM-R',
     ];
 
+    /**
+     * @var array<int, string>
+     */
+    private const MOBILE_PREFIX_SERVICES = [
+        '501' => 'Mobile electronic communication service',
+        '505' => 'Mobile electronic communication service',
+        '506' => 'Mobile electronic communication service',
+        '507' => 'Mobile electronic communication service',
+        '510' => 'Mobile virtual network service numbers',
+        '512' => 'Call service numbers',
+        '516' => 'Mobile virtual network service numbers',
+        '530' => 'Mobile electronic communication service',
+        '531' => 'Mobile electronic communication service',
+        '532' => 'Mobile electronic communication service',
+        '533' => 'Mobile electronic communication service',
+        '534' => 'Mobile electronic communication service',
+        '535' => 'Mobile electronic communication service',
+        '536' => 'Mobile electronic communication service',
+        '537' => 'Mobile electronic communication service',
+        '538' => 'Mobile electronic communication service',
+        '539' => 'Mobile electronic communication service',
+        '540' => 'Mobile electronic communication service',
+        '541' => 'Mobile electronic communication service',
+        '542' => 'Mobile electronic communication service',
+        '543' => 'Mobile electronic communication service',
+        '544' => 'Mobile electronic communication service',
+        '545' => 'Mobile electronic communication service',
+        '546' => 'Mobile electronic communication service',
+        '547' => 'Mobile electronic communication service',
+        '548' => 'Mobile electronic communication service',
+        '549' => 'Mobile electronic communication service',
+        '551' => 'Mobile electronic communication service',
+        '552' => 'Mobile electronic communication service',
+        '553' => 'Mobile electronic communication service',
+        '554' => 'Mobile electronic communication service',
+        '555' => 'Mobile electronic communication service',
+        '559' => 'Mobile electronic communication service',
+        '561' => 'Mobile virtual network service numbers',
+        '570' => 'Machine-to-machine (M2M) service numbers',
+        '571' => 'Machine-to-machine (M2M) service numbers',
+        '572' => 'Machine-to-machine (M2M) service numbers',
+        '573' => 'Machine-to-machine (M2M) service numbers',
+        '574' => 'Machine-to-machine (M2M) service numbers',
+        '575' => 'Machine-to-machine (M2M) service numbers',
+        '592' => 'GMPCS mobile satellite service numbers',
+        '594' => 'GSM-R railway communication service numbers',
+    ];
+
     public static function typeFor(string $digits): ?PhoneType
     {
         if (isset(self::MOBILE_PREFIX_ALLOCATIONS[self::prefix($digits)])) {
@@ -163,6 +216,11 @@ final class TurkishNumberingPlan
     public static function prefixAllocation(string $digits): ?string
     {
         return self::MOBILE_PREFIX_ALLOCATIONS[self::prefix($digits)] ?? null;
+    }
+
+    public static function prefixService(string $digits): ?string
+    {
+        return self::MOBILE_PREFIX_SERVICES[self::prefix($digits)] ?? null;
     }
 
     public static function areaName(string $digits): ?string

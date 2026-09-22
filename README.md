@@ -107,6 +107,8 @@ $phone->isMobile(); // true
 
 Mobile validation is based on BTK mobile numbering ranges such as `50X`, `53X`, `54X`, selected `55X`, and other documented mobile-service prefixes.
 
+BTK also lists special 5XX services under the mobile-number section, including mobile virtual network service numbers (`510`, `516`, `561`), call service numbers (`512`), M2M service numbers (`570`-`575`), GMPCS mobile satellite service numbers (`592`), and GSM-R railway communication service numbers (`594`). TR Phone treats these prefixes as valid Turkish mobile-numbering-plan entries, but does not describe them as ordinary consumer mobile operator allocations.
+
 ## Landline Numbers
 
 ```php
@@ -125,9 +127,10 @@ $phone = PhoneNumber::parse('0532 123 45 67');
 
 echo $phone->prefix();         // 532
 echo $phone->prefixOperator(); // Turkcell
+echo $phone->prefixService();  // Mobile electronic communication service
 ```
 
-`prefixOperator()` and `prefixAllocation()` return prefix-based original allocation information. They do not identify the subscriber's current carrier.
+`prefixOperator()` and `prefixAllocation()` return prefix-based original allocation information. They do not identify the subscriber's current carrier. `prefixService()` describes the BTK service category for the prefix, which is especially useful for special services such as M2M, GMPCS, GSM-R, call service, and mobile virtual network service numbers.
 
 ## Number Portability Warning
 
@@ -175,6 +178,7 @@ More copy-paste examples are available in [docs/examples.md](docs/examples.md).
 - `PhoneNumber::prefix(): string`
 - `PhoneNumber::prefixOperator(): ?string`
 - `PhoneNumber::prefixAllocation(): ?string`
+- `PhoneNumber::prefixService(): ?string`
 - `PhoneNumber::areaName(): ?string`
 - `TrPhone::validate(string $input): bool`
 - `TrPhone::normalize(string $input): string`
@@ -214,7 +218,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md). Do not post real customer phone 
 
 ## Security
 
-Please read [SECURITY.md](SECURITY.md). Security reports can be sent to `info@kariha.net`.
+Please read [SECURITY.md](SECURITY.md). Security reports can be sent to `security@kariha.net`.
 
 ## License
 

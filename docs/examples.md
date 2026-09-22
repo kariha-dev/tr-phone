@@ -73,6 +73,9 @@ $payload['phone'] = TrPhone::format($payload['phone'], Format::E164);
 $phone = PhoneNumber::parse('0532 123 45 67');
 
 echo $phone->prefixOperator(); // Turkcell
+echo $phone->prefixService();  // Mobile electronic communication service
 ```
 
 This is original prefix allocation information. It is not the current carrier because mobile number portability is available in Türkiye.
+
+Special 5XX services such as M2M, GMPCS, GSM-R, call service, and mobile virtual network service numbers are valid Turkish mobile-numbering-plan entries, but they are not ordinary consumer mobile operator allocations.

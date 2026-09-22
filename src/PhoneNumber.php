@@ -86,6 +86,11 @@ final class PhoneNumber
         return $this->prefixOperator();
     }
 
+    public function prefixService(): ?string
+    {
+        return TurkishNumberingPlan::prefixService($this->digits);
+    }
+
     public function areaName(): ?string
     {
         return TurkishNumberingPlan::areaName($this->digits);
