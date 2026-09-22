@@ -9,6 +9,8 @@ It is built for web forms, CRM systems, appointment software, e-commerce project
 ![PHP](https://img.shields.io/badge/php-%5E8.1-777bb4.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![CI](https://github.com/kariha-dev/tr-phone/actions/workflows/ci.yml/badge.svg)
+![Latest Stable Version](https://img.shields.io/packagist/v/kariha/tr-phone.svg)
+![Total Downloads](https://img.shields.io/packagist/dt/kariha/tr-phone.svg)
 
 ## What is TR Phone?
 
